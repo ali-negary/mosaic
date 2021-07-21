@@ -5,61 +5,54 @@
 import pandas as pd
 import json
 
-"""
-    "read_file" gets the path to the csv file and convert the csv into a pandas dataframe with the provided headers.
-        path_to_csv: exact path to .csv file.
-        column_names: a list of strings that will be the column headers of the output dataframe.
-        output when executed successfully: pandas dataframe
-"""
-
 
 def read_file(path_to_csv, column_names):
+    """
+    "read_file" gets the path to the csv file and convert the csv into a pandas dataframe with the provided headers.
+    :param path_to_csv: exact path to .csv file.
+    :param column_names: a list of strings that will be the column headers of the output dataframe.
+    :return: pandas dataframe
+    """
     return pd.read_csv(path_to_csv, names=column_names, header=0)
 
 
-"""
-    "save_results" gets a dictionary and saves it on the disk. The stored file will be in .json format.
-        result_dict: the dictionary which should be saved in disk.
-        path: the exact location on disk where the disk should be saved.
-        output when executed successfully: nothing.
-"""
-
-
 def save_results(result_dict, path):
+    """
+    "save_results" gets a dictionary and saves it on the disk. The stored file will be in .json format.
+    :param result_dict: the dictionary which should be saved in disk.
+    :param path: the exact location on disk where the disk should be saved.
+    :return: nothing.
+    """
     output_file = open(path, 'w')
     output_file.write(json.dumps(result_dict))
     return None
 
 
-"""
+def check_weights(tests, marks):
+    """
     "check_weights" gets two dataframes of tests and marks. It will merge (join in SQL) them by test_id and removes the redundant columns.
     Next, the result will be grouped by course_id and then student_id and summation of test_wrights will be calculated.
     If all the records inside the test_weight column are equal to 100, it means the grades are valid.
-        tests: records provided in tests.csv
-        marks: records provided in marks.csv
-        output when executed successfully: True.
-"""
-
-
-def check_weights(tests, marks):
+    :param tests: records provided in tests.csv
+    :param marks: records provided in marks.csv
+    :return: True
+    """
     marks_tests = pd.merge(marks, tests, how='left', on="test_id").drop(labels=['test_id', 'test_mark'], axis=1)
     marks_tests = marks_tests.groupby(['course_id', 'student_id']).sum()
     return (marks_tests['test_weight'] == 100).all()
 
 
-"""
+def calculate_grades(courses, students, tests, marks):
+    """
     "calculate_grades" gets 4 dataframes provided by the input .csv files and calculate the average of students' marks.
         - joins the marks and test on test_id.
         - calculates the weighted marks of the students based on test_marks and and their test_weights.
         - calculate the average of each student for all their courses (students_average).
         - calculate the marks of each student for each course (sum_per_course).
         - join student_average and sum_per_course to get a complete set of records.
-            output when executed successfully: a dataframe with the following headers:
+    :return: a pandas dataframe with the following headers:
                 student_id, course_id, weighted_marks, course_name, teacher_name, student_name, student_average
-"""
-
-
-def calculate_grades(courses, students, tests, marks):
+    """
     marks_tests = pd.merge(marks, tests, how='left', on="test_id")
     marks_tests['weighted_marks'] = marks_tests['test_mark'] * marks_tests['test_weight'] / 100
     # students' average
@@ -75,7 +68,8 @@ def calculate_grades(courses, students, tests, marks):
     return complete_complete
 
 
-"""
+def csv2json(complete_dataset):
+    """
     "csv2json" gets a pandas dataframe of complete records for each student and in return creates a dictionary with the requested format.
         the requested format is:
                     { "students": [   {
@@ -88,11 +82,8 @@ def calculate_grades(courses, students, tests, marks):
                                                         "teacher": "Mr. D",
                                                         "courseAverage": 90.1
                                                     } ] } ] }
-            output when executed successfully: a nested dictionary:
-"""
-
-
-def csv2json(complete_dataset):
+    :return: a nested dictionary
+    """
     results = complete_dataset.to_dict('records')
     final_details = {"students": []}
     records = dict()
