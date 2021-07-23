@@ -13,7 +13,10 @@ def read_file(path_to_csv, column_names):
     :param column_names: a list of strings that will be the column headers of the output dataframe.
     :return: pandas dataframe
     """
-    return pd.read_csv(path_to_csv, names=column_names, header=0)
+    try:
+        return pd.read_csv(path_to_csv, names=column_names, header=0)
+    except Exception as error:
+        raise error
 
 
 def save_results(result_dict, path):
