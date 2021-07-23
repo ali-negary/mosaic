@@ -1,0 +1,9 @@
+,student_id,course_id,weighted_marks,course_name,teacher_name,student_name,student_average
+0,1,1,90.1,Biology,Mr. D,A,72.03
+1,1,2,51.8,History, Mrs. P,A,72.03
+2,
+3,
+4,2,3,74.2,Math, Mrs. C,B,62.15
+5,3,1,90.1,Biology,Mr. D,C,72.03
+6,3,2,51.8,History, Mrs. P,C,72.03
+7,3,3,74.2,Math, Mrs. C,C,72.03
