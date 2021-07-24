@@ -11,7 +11,7 @@ I have tried the given examples (Example1 and Example2), but I created two other
 Although the task is simple, there are some improvements that can be done. For example, the _check_weights()_ method, can be done inside the calculations.
 Right nwo, a part of the calculation is redundant and have happened earlier.
 
-Another thing that should be done is benchmarking with a huge workloads. I am not sure how big of a workload can a school grading system be, but faster is always better.
+Another thing that should be done is benchmarking with a huge workload. I am not sure how big of a workload can a school grading system be, but faster is always better.
 ****
 **Why pandas?**
 
