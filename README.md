@@ -1,0 +1,33 @@
+## How did the students do?
+
+This code is written by Ali Negary as the interview task for Mosaic.
+****
+**A short explanation:**
+
+I had to work for the past two weeks. So, I had to begin this task later. It took me a couple of hours to write the main.py and utils.py.
+But the unit test (test_utils.py) took me longer than I thought it would. Because I am new to unit testing, and it was the first time I did unit testing for pandas (Honestly, I don't think I did a good job).
+I have tried the given examples (Example1 and Example2), but I created two other sets of example files. All were working fine.
+****
+**Why pandas?**
+
+I benefited from the vectorized calculation of Pandas to make things faster than loops. Of course, I had the option to use Numpy as well.
+However, Pandas seemed a better choice as it had SQL-like functionalities.
+
+****
+**How to Run?**
+
+- First, you need to have a pair of running shoes :D
+
+- Then, you need to open the terminal and enter the following command:
+
+`python [path to main.py] [path to courses.csv] [path to students.csv] [path to tests.csv] [path to marks.csv] [path to output.json]
+`
+
+_[path to output.json]_ is where you like your output to be saved.
+
+**Requirements:**
+
+The only things you need for running the program are _sys_, _pandas_, and _json_.
+
+
+`Thank you for this opportunity.`
