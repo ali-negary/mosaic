@@ -87,28 +87,31 @@ def csv2json(complete_dataset):
                                                     } ] } ] }
     :return: a nested dictionary
     """
-    results = complete_dataset.to_dict('records')
-    final_details = {"students": []}
-    records = dict()
-    for student in results:
-        temp = dict()
-        if student['student_id'] not in records.keys():
-            temp["id"] = student['student_id']
-            temp["name"] = student['student_name']
-            temp["totalAverage"] = round(student['student_average'], 2)
-            temp['courses'] = [{
-                "id": student['course_id'],
-                "name": student['course_name'],
-                "teacher": student['teacher_name'],
-                "courseAverage": round(student['weighted_marks'], 2)
-            }]
-            records[student['student_id']] = temp
-        else:
-            records[student['student_id']]['courses'].append({
-                "id": student['course_id'],
-                "name": student['course_name'],
-                "teacher": student['teacher_name'],
-                "courseAverage": round(student['weighted_marks'], 2)
-            })
-    final_details['students'] = list(records.values())
-    return final_details
+    try:
+        results = complete_dataset.to_dict('records')
+        final_details = {"students": []}
+        records = dict()
+        for student in results:
+            temp = dict()
+            if student['student_id'] not in records.keys():
+                temp["id"] = student['student_id']
+                temp["name"] = student['student_name']
+                temp["totalAverage"] = round(student['student_average'], 2)
+                temp['courses'] = [{
+                    "id": student['course_id'],
+                    "name": student['course_name'],
+                    "teacher": student['teacher_name'],
+                    "courseAverage": round(student['weighted_marks'], 2)
+                }]
+                records[student['student_id']] = temp
+            else:
+                records[student['student_id']]['courses'].append({
+                    "id": student['course_id'],
+                    "name": student['course_name'],
+                    "teacher": student['teacher_name'],
+                    "courseAverage": round(student['weighted_marks'], 2)
+                })
+        final_details['students'] = list(records.values())
+        return final_details
+    except Exception as error:
+        raise error
