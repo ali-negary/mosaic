@@ -1,6 +1,5 @@
 ## How did the students do?
 
-This code is written by Ali Negary as the interview task for Mosaic.
 ****
 **A short explanation:**
 
@@ -32,7 +31,5 @@ _[path to output.json]_ is where you like your output to be saved.
 
 **Requirements:**
 
-The only things you need for running the program are _sys_, _pandas_, and _json_.
+The only packages you need for running the program are _sys_, _pandas_, and _json_.
 ****
-
-_**Thank you for this opportunity.**_
